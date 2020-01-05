@@ -10,13 +10,11 @@ interface IProductProps {
 const Product: NextPage<IProductProps> = ({ product }) => {
   return (
     <div>
-      <img
-        src={product.images[0].src}
-        alt={product.images[0].altText}
-        style={{ width: '100%' }}
-      />
+      {product.images.map(item => (
+        <img src={item.src} alt={item.altText} style={{ width: '100%' }} />
+      ))}
       <h1>{product.title}</h1>
-      <p>{product.description}</p>
+      <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
     </div>
   )
 }

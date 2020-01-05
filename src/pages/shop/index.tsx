@@ -23,7 +23,6 @@ const Shop: NextPage<IShop> = ({ products }) => {
                   style={{ width: '100%' }}
                 />
                 <h2>{item.title}</h2>
-                <div>{item.description}</div>
               </a>
             </Link>
           ))}
