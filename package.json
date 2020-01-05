@@ -29,6 +29,8 @@
     "react": "16.12.0",
     "react-dom": "16.12.0",
     "shopify-buy": "^2.8.1",
+    "styled-components": "^4.4.1",
+    "styled-reset": "^4.0.9",
     "typescript": "^3.7.4"
   },
   "devDependencies": {}
