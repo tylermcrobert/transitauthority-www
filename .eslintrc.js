@@ -10,6 +10,15 @@ const TYPESCRIPT_RULES = {
   '@typescript-eslint/explicit-function-return-type': 0,
   // Disabling because of bug
   '@typescript-eslint/no-unused-vars': 0,
+  '@typescript-eslint/member-delimiter-style': [
+    1,
+    {
+      multiline: {
+        delimiter: 'none',
+        requireLast: false,
+      },
+    },
+  ],
   'no-unused-vars': 0,
 }
 
