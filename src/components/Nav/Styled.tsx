@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const Nav = styled.nav`
-  position: fixed;
+  position: sticky;
   top: 0px;
 
   background: white;
