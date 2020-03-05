@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { IProduct } from 'shopify/types'
 import useCart from 'hooks/useCart'
 import S from './ProductPage.Styled'
@@ -18,6 +18,12 @@ const ProductPage: React.FC<{ product: IProduct }> = ({ product }) => {
       setErrorCode('NOVARIANT')
     }
   }
+
+  useEffect(() => {
+    if (currentVariantId) {
+      setErrorCode(null)
+    }
+  }, [currentVariantId])
 
   return (
     <S.Wrapper>
