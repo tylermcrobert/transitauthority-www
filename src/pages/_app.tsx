@@ -1,7 +1,10 @@
 import Layout from 'components/Layout'
 import { CartProvider } from 'components'
 
-function MyApp({ Component, pageProps }) {
+const MyApp: React.FC<{
+  Component: any
+  pageProps: any
+}> = ({ Component, pageProps }) => {
   return (
     <CartProvider>
       <Layout>

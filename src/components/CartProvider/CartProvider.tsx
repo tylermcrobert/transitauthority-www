@@ -1,15 +1,14 @@
 import React, { createContext } from 'react'
 
 export const CartCtx = createContext<{
-  addToCart: () => void
+  addToCart: (id: string) => null
 }>({
   addToCart: () => null,
 })
 
-const CartProvider = ({ children }) => {
-  const addToCart = () => {
-    console.log('add to cart')
-
+const CartProvider: React.FC = ({ children }) => {
+  const addToCart = (id: string): null => {
+    console.log({ id })
     return null
   }
 
