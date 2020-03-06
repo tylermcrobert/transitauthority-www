@@ -1,5 +1,5 @@
 import React from 'react'
-import Nav from 'components/Nav'
+import Nav from 'components/Nav/Nav'
 import GlobalStyle from 'style/GlobalStyle'
 
 const Layout: React.FC = ({ children }) => {
