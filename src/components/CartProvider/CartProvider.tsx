@@ -11,15 +11,6 @@ export const CartCtx = createContext<{
 })
 
 /**
- * Cart functions
- */
-
-const addToCart = (id: string): null => {
-  console.log({ id })
-  return null
-}
-
-/**
  * Setup checkout
  */
 
@@ -32,7 +23,7 @@ const useCheckout = () => {
     })
   }, [])
 
-  return checkout
+  return { checkout, setCheckout }
 }
 
 /**
@@ -40,10 +31,35 @@ const useCheckout = () => {
  */
 
 const CartProvider: React.FC = ({ children }) => {
-  const checkout = useCheckout()
+  const { checkout, setCheckout } = useCheckout()
+
+  /**
+   * Add to cart
+   */
+
+  const addToCart = (variantId: string): null => {
+    if (checkout) {
+      client.checkout
+        .addLineItems(checkout.id, [
+          {
+            variantId,
+            quantity: 1,
+          },
+        ])
+        .then((newCheckout: ICheckout) => {
+          setCheckout(newCheckout)
+        })
+    }
+    return null
+  }
 
   return (
-    <CartCtx.Provider value={{ addToCart, checkout }}>
+    <CartCtx.Provider
+      value={{
+        addToCart,
+        checkout,
+      }}
+    >
       {children}
     </CartCtx.Provider>
   )
