@@ -27,7 +27,7 @@ export interface ICheckout {
   shippingLine: any
   customAttributes: []
   order: any
-  lineItems: []
+  lineItems: ICheckoutLineItem[]
 }
 
 interface IPrice {
@@ -41,5 +41,29 @@ interface IPrice {
       currencyCode: string
     }
     implementsNode: boolean
+  }
+}
+
+export interface ICheckoutLineItem {
+  id: string
+  title: string
+  quantity: number
+  variant: {
+    id: string
+    title: string
+    price: string
+    priceV2: IPrice
+    presentmentPrices: any
+    weight: number
+    available: boolean
+    sku: string
+    compareAtPrice: any
+    compareAtPriceV2: any
+    image: {
+      id: string
+      src: string
+      altText: string
+    }
+    selectedOptions: any // TODO: Typeme
   }
 }
