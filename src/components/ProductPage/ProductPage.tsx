@@ -81,23 +81,22 @@ const Variants = () => {
  */
 
 const AddToCart: React.FC = () => {
-  const [isNoVariantErr, setNoVariantErr] = useState<boolean>(false)
   const { currentVariantId } = useContext(ProductCtx)
   const { addToCart } = useCart()
 
   const handleCartButton = () => {
     if (currentVariantId) {
       addToCart(currentVariantId)
-      setNoVariantErr(false)
-    } else {
-      setNoVariantErr(true)
     }
   }
 
   return (
     <div>
-      {isNoVariantErr && isNoVariantErr && <div>Please choose a variant</div>}
-      <button onClick={handleCartButton} type="button">
+      <button
+        onClick={handleCartButton}
+        type="button"
+        disabled={!currentVariantId}
+      >
         Add to cart
       </button>
     </div>
