@@ -64,6 +64,6 @@ export interface ICheckoutLineItem {
       src: string
       altText: string
     }
-    selectedOptions: any // TODO: Typeme
+    selectedOptions: any
   }
 }
