@@ -48,6 +48,9 @@ module.exports = {
     'jsx-a11y/no-static-element-interactions': 0,
     'jsx-a11y/click-events-have-key-events': 0,
 
+    // CMSes need this
+    'react/no-danger': 0,
+
     ...TYPESCRIPT_RULES,
     ...NEXTJS_RULES,
   },
