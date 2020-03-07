@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react'
 import { client } from 'shopify'
+import Cookie from 'js-cookie'
 import { ICheckout } from '../../types/shopify'
 
 export const CartCtx = createContext<{
@@ -18,9 +19,18 @@ const useCheckout = () => {
   const [checkout, setCheckout] = useState<ICheckout | null>(null)
 
   useEffect(() => {
-    client.checkout.create().then((data: ICheckout) => {
-      setCheckout(data)
-    })
+    const checkoutId = Cookie.get('shopifyCheckoutId')
+
+    if (checkoutId) {
+      client.checkout.fetch(checkoutId).then((ckData: ICheckout) => {
+        setCheckout(ckData)
+      })
+    } else {
+      client.checkout.create().then((data: ICheckout) => {
+        setCheckout(data)
+        Cookie.set('shopifyCheckoutId', data.id)
+      })
+    }
   }, [])
 
   return { checkout, setCheckout }
