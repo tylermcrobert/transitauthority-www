@@ -6,9 +6,15 @@ import { ICheckout } from '../../types/shopify'
 export const CartCtx = createContext<{
   addToCart: (id: string) => null
   checkout: ICheckout | null
+  openCart: () => void
+  closeCart: () => void
+  isCartOpen: boolean
 }>({
   addToCart: () => null,
   checkout: null,
+  openCart: () => null,
+  closeCart: () => null,
+  isCartOpen: false,
 })
 
 /**
@@ -42,6 +48,7 @@ const useCheckout = () => {
 
 const CartProvider: React.FC = ({ children }) => {
   const { checkout, setCheckout } = useCheckout()
+  const [isCartOpen, setCartOpen] = useState<boolean>(false)
 
   /**
    * Add to cart
@@ -68,6 +75,9 @@ const CartProvider: React.FC = ({ children }) => {
       value={{
         addToCart,
         checkout,
+        openCart: () => setCartOpen(true),
+        closeCart: () => setCartOpen(false),
+        isCartOpen,
       }}
     >
       {children}

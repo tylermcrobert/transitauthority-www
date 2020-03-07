@@ -12,6 +12,7 @@ const GlobalStyle = createGlobalStyle`
    letter-spacing: -.03em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height:1.3;
  }
 
  

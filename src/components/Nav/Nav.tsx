@@ -5,7 +5,7 @@ import { Cart } from 'components'
 import Styled from './Nav.Styled'
 
 const Nav = () => {
-  const { checkout } = useCart()
+  const { checkout, openCart } = useCart()
 
   return (
     <>
@@ -17,7 +17,9 @@ const Nav = () => {
           <a>Shop</a>
         </Link>
         &nbsp;&nbsp;
-        <div>Cart {checkout ? `(${checkout.lineItems.length})` : null}</div>
+        <div onClick={openCart}>
+          Cart {checkout ? `(${checkout.lineItems.length})` : null}
+        </div>
       </Styled.Nav>
       <Cart />
     </>

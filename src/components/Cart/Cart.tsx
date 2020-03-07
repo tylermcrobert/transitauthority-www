@@ -7,21 +7,23 @@ import S from './Cart.Styled'
 // TODO: add + and -
 
 const Cart = () => {
-  const { checkout } = useCart()
+  const { checkout, isCartOpen, closeCart } = useCart()
 
-  if (checkout) {
+  if (checkout && isCartOpen) {
     return (
       <S.Cart>
         <hr />
         {checkout.lineItems.length ? (
           <div>
             <br />
-            <h1>Your Cart</h1>
+            <h1>
+              Your Cart <span onClick={closeCart}>(✕)</span>
+            </h1>
+            <br />
             <hr />
             {checkout.lineItems.map(item => (
               <LineItem data={item} key={item.id} />
             ))}
-            <br />
             <br />
             <h2>TOTAL: ${checkout.paymentDue}</h2>
             <a href={checkout.webUrl} target="_blank" rel="noopener noreferrer">
@@ -47,8 +49,9 @@ const LineItem: React.FC<{ data: ICheckoutLineItem }> = ({ data }) => {
   return (
     <div>
       <h2>{title}</h2>
+      <h3>( - ) {quantity} ( + )</h3>
       <h4>
-        {variant.title} • {variant.price} • (x{quantity})
+        {variant.title} • ${parseFloat(variant.price) * quantity} • Remove
       </h4>
       <hr />
     </div>
