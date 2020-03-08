@@ -7,6 +7,10 @@ import Styled from './Nav.Styled'
 const Nav = () => {
   const { checkout, openCart } = useCart()
 
+  const checkoutAmount = checkout
+    ? checkout.lineItems.reduce((acc, lineItem) => acc + lineItem.quantity, 0)
+    : null
+
   return (
     <>
       <Styled.Nav>
@@ -18,7 +22,7 @@ const Nav = () => {
         </Link>
         &nbsp;&nbsp;
         <div onClick={openCart}>
-          Cart {checkout ? `(${checkout.lineItems.length})` : null}
+          Cart {checkoutAmount ? `(${checkoutAmount})` : null}
         </div>
       </Styled.Nav>
       <Cart />
