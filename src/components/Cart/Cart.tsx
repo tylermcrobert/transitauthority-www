@@ -1,9 +1,8 @@
 import React from 'react'
 import useCart from 'hooks/useCart'
-import { ICheckoutLineItem } from 'types/shopify'
+import { ICheckoutLineItem, VariantId } from 'types/shopify'
 import S from './Cart.Styled'
 
-//  TODO: Add close
 // TODO: add + and -
 
 const Cart = () => {
@@ -46,10 +45,23 @@ const Cart = () => {
 const LineItem: React.FC<{ data: ICheckoutLineItem }> = ({ data }) => {
   const { title, variant, quantity } = data
 
+  const { updateLineItems } = useCart()
+
+  const inc = () => {
+    updateLineItems(data.id, quantity + 1)
+  }
+
+  const dec = () => {
+    updateLineItems(data.id, quantity - 1)
+  }
+
   return (
     <div>
       <h2>{title}</h2>
-      <h3>( - ) {quantity} ( + )</h3>
+      <h3>
+        <span onClick={dec}>( - )</span> {quantity}{' '}
+        <span onClick={inc}>( + )</span>
+      </h3>
       <h4>
         {variant.title} • ${parseFloat(variant.price) * quantity} • Remove
       </h4>

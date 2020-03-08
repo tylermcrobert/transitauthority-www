@@ -1,16 +1,18 @@
 import React, { createContext, useState, useEffect } from 'react'
 import { client } from 'shopify'
 import Cookie from 'js-cookie'
-import { ICheckout } from '../../types/shopify'
+import { ICheckout, VariantId } from '../../types/shopify'
 
 export const CartCtx = createContext<{
   addToCart: (id: string) => null
+  updateLineItems: (id: VariantId, quantity: number) => null
   checkout: ICheckout | null
   openCart: () => void
   closeCart: () => void
   isCartOpen: boolean
 }>({
   addToCart: () => null,
+  updateLineItems: () => null,
   checkout: null,
   openCart: () => null,
   closeCart: () => null,
@@ -70,10 +72,22 @@ const CartProvider: React.FC = ({ children }) => {
     return null
   }
 
+  const updateLineItems = (variantId: VariantId, quantity: number): null => {
+    if (checkout) {
+      client.checkout
+        .updateLineItems(checkout.id, [{ id: variantId, quantity }])
+        .then((newCheckout: ICheckout) => {
+          setCheckout(newCheckout)
+        })
+    }
+    return null
+  }
+
   return (
     <CartCtx.Provider
       value={{
         addToCart,
+        updateLineItems,
         checkout,
         openCart: () => setCartOpen(true),
         closeCart: () => setCartOpen(false),

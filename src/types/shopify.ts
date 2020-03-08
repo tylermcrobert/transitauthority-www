@@ -44,12 +44,14 @@ interface IPrice {
   }
 }
 
+export type VariantId = string
+
 export interface ICheckoutLineItem {
   id: string
   title: string
   quantity: number
   variant: {
-    id: string
+    id: VariantId
     title: string
     price: string
     priceV2: IPrice
