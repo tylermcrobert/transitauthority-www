@@ -60,9 +60,6 @@ const Information = () => {
  * Variants selector
  */
 
-//  https://github.com/tylermcrobert/hightide-www/blob/storefront/src/templates/Product/index.js#L18
-// https://shopify.github.io/js-buy-sdk/ProductHelpers.html
-
 const Variants = () => {
   const { product, setCurrentVariantId } = useContext(ProductCtx)
 
