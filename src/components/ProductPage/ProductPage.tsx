@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext } from 'react'
+import React, { useState, useEffect, createContext, useContext } from 'react'
 import { IProduct } from 'shopify/types'
 import useCart from 'hooks/useCart'
 import { client } from 'shopify'
@@ -66,6 +66,7 @@ const Information = () => {
 const Variants = () => {
   const { product, setCurrentVariantId } = useContext(ProductCtx)
 
+  // state setup
   const initialState = product.options.reduce((acc, cur) => {
     const val = cur.values.length > 1 ? null : cur.values[0].value
     return { [cur.name]: val, ...acc }
@@ -73,25 +74,28 @@ const Variants = () => {
 
   const [currentOptions, setCurrentOptions] = useState(initialState)
 
+  // handle option click
   const handleClick = (value: string, optionName: string) => {
-    const updatedState = { ...currentOptions, [optionName]: value }
-    setCurrentOptions(updatedState)
-
-    const variant = client.product.helpers.variantForOptions(
-      product,
-      updatedState
-    )
-
-    setCurrentVariantId(variant.id)
+    setCurrentOptions({ ...currentOptions, [optionName]: value })
   }
 
+  // sync variant with state
+  useEffect(() => {
+    const variant = client.product.helpers.variantForOptions(
+      product,
+      currentOptions
+    )
+
+    if (variant) {
+      setCurrentVariantId(variant.id)
+    }
+  }, [currentOptions])
+
   return (
-    <div>
+    <>
       {product.options.map(option => (
         <div key={option.name}>
-          <br />
           <h3>{option.name}</h3>
-
           {option.values.map(({ value }) => {
             const isCurrent = currentOptions[option.name] === value
             return (
@@ -104,7 +108,7 @@ const Variants = () => {
         </div>
       ))}
       <hr />
-    </div>
+    </>
   )
 }
 
