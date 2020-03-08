@@ -3,7 +3,8 @@ import useCart from 'hooks/useCart'
 import { ICheckoutLineItem, VariantId } from 'types/shopify'
 import S from './Cart.Styled'
 
-// TODO: add + and -
+// TODO: Add clickaway
+// TODO: Add 'remove' functionality
 
 const Cart = () => {
   const { checkout, isCartOpen, closeCart } = useCart()
