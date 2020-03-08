@@ -88,9 +88,11 @@ const Variants = () => {
     }
   }, [currentOptions])
 
+  const multipleOptions = product.options.filter(item => item.values.length > 1)
+
   return (
     <>
-      {product.options.map(option => (
+      {multipleOptions.map(option => (
         <div key={option.name}>
           <h3>{option.name}</h3>
           {option.values.map(({ value }) => {
