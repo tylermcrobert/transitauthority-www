@@ -46,6 +46,11 @@ interface IPrice {
 
 export type VariantId = string
 
+type SelectedOption = {
+  name: string
+  value: string
+}
+
 export interface ICheckoutLineItem {
   id: string
   title: string
@@ -66,6 +71,6 @@ export interface ICheckoutLineItem {
       src: string
       altText: string
     }
-    selectedOptions: any // TODO: Typeme
+    selectedOptions: SelectedOption[]
   }
 }

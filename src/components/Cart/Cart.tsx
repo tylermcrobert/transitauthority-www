@@ -56,13 +56,16 @@ const LineItem: React.FC<{ data: ICheckoutLineItem }> = ({ data }) => {
     <div>
       <img src={variant.image.src} style={{ width: '4em' }} alt={title} />
       <h2>{title}</h2>
-      <h3>
+      <h4>
         <span onClick={dec}>( - )</span> {quantity}{' '}
         <span onClick={inc}>( + )</span>
-      </h3>
-      <h4>
-        {variant.title} • ${parseFloat(variant.price) * quantity} • Remove
       </h4>
+      {data.variant.selectedOptions.map(({ name, value }) => (
+        <div key={value}>
+          {name}: {value}
+        </div>
+      ))}
+      <p>${parseFloat(variant.price) * quantity} • Remove</p>
       <hr />
     </div>
   )
