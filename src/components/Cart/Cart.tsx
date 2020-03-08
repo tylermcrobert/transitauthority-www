@@ -5,7 +5,6 @@ import useClickAway from 'hooks/useClickAway'
 import S from './Cart.Styled'
 
 // TODO: Add 'remove' functionality
-// TODO: Add rounding for items for things like $44.339999999999996
 
 const Cart = () => {
   const { checkout, isCartOpen, closeCart } = useCart()
@@ -52,6 +51,8 @@ const LineItem: React.FC<{ data: ICheckoutLineItem }> = ({ data }) => {
   const inc = () => updateLineItems(data.id, quantity + 1)
   const dec = () => updateLineItems(data.id, quantity - 1)
 
+  const amount = (parseFloat(variant.price) * quantity).toFixed(2)
+
   return (
     <div>
       <img src={variant.image.src} style={{ width: '4em' }} alt={title} />
@@ -65,7 +66,7 @@ const LineItem: React.FC<{ data: ICheckoutLineItem }> = ({ data }) => {
           {name}: {value}
         </div>
       ))}
-      <p>${parseFloat(variant.price) * quantity} • Remove</p>
+      <p>${amount} • Remove</p>
       <hr />
     </div>
   )
