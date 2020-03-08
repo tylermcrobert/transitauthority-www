@@ -14,6 +14,8 @@ const ProductCtx = createContext<{
   setCurrentVariantId: () => null,
 })
 
+// TODO: Add greyed out for sold out
+
 const ProductPage: React.FC<{ product: IProduct }> = ({ product }) => {
   const [currentVariantId, setCurrentVariantId] = useState<null | string>(null)
 
