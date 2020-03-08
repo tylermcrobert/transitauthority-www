@@ -53,6 +53,7 @@ const LineItem: React.FC<{ data: ICheckoutLineItem }> = ({ data }) => {
 
   return (
     <div>
+      <img src={variant.image.src} style={{ width: '4em' }} alt={title} />
       <h2>{title}</h2>
       <h3>
         <span onClick={dec}>( - )</span> {quantity}{' '}
