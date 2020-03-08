@@ -8,7 +8,6 @@ import S from './Cart.Styled'
 
 const Cart = () => {
   const { checkout, isCartOpen, closeCart } = useCart()
-
   const ref = useClickAway(closeCart)
 
   if (checkout && isCartOpen) {
@@ -47,16 +46,10 @@ const Cart = () => {
 
 const LineItem: React.FC<{ data: ICheckoutLineItem }> = ({ data }) => {
   const { title, variant, quantity } = data
-
   const { updateLineItems } = useCart()
 
-  const inc = () => {
-    updateLineItems(data.id, quantity + 1)
-  }
-
-  const dec = () => {
-    updateLineItems(data.id, quantity - 1)
-  }
+  const inc = () => updateLineItems(data.id, quantity + 1)
+  const dec = () => updateLineItems(data.id, quantity - 1)
 
   return (
     <div>
