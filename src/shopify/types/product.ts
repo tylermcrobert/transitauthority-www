@@ -6,6 +6,13 @@ export interface IImage {
   altText: string
 }
 
+type Option = {
+  name: string
+  values: {
+    value: string
+  }[]
+}
+
 export interface IProduct {
   id: string
   createdAt: string
@@ -20,7 +27,7 @@ export interface IProduct {
   publishedAt: string
   onlineStoreUrl: string
 
-  options: Array<{ name: string; values: string[] }>
+  options: Option[]
   images: Array<IImage>
   variants?: Array<IVariant>
 }

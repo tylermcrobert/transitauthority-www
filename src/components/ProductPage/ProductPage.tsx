@@ -1,6 +1,7 @@
 import React, { useState, createContext, useContext } from 'react'
 import { IProduct } from 'shopify/types'
 import useCart from 'hooks/useCart'
+import { client } from 'shopify'
 import S from './ProductPage.Styled'
 
 const ProductCtx = createContext<{
@@ -59,20 +60,49 @@ const Information = () => {
  * Variants selector
  */
 
+//  https://github.com/tylermcrobert/hightide-www/blob/storefront/src/templates/Product/index.js#L18
+// https://shopify.github.io/js-buy-sdk/ProductHelpers.html
+
 const Variants = () => {
-  const { product, currentVariantId, setCurrentVariantId } = useContext(
-    ProductCtx
-  )
+  const { product, setCurrentVariantId } = useContext(ProductCtx)
+
+  const initialState = product.options.reduce((acc, cur) => {
+    const val = cur.values.length > 1 ? null : cur.values[0].value
+    return { [cur.name]: val, ...acc }
+  }, {} as any)
+
+  const [currentOptions, setCurrentOptions] = useState(initialState)
+
+  const handleClick = (value: string, optionName: string) => {
+    const updatedState = { ...currentOptions, [optionName]: value }
+    setCurrentOptions(updatedState)
+
+    const variant = client.product.helpers.variantForOptions(
+      product,
+      updatedState
+    )
+
+    setCurrentVariantId(variant.id)
+  }
 
   return (
     <div>
-      {product.variants &&
-        product.variants.map(item => (
-          <div key={item.title} onClick={() => setCurrentVariantId(item.id)}>
-            {item.id === currentVariantId ? '• ' : ''}
-            {item.title}
-          </div>
-        ))}
+      {product.options.map(option => (
+        <div key={option.name}>
+          <br />
+          <h3>{option.name}</h3>
+
+          {option.values.map(({ value }) => {
+            const isCurrent = currentOptions[option.name] === value
+            return (
+              <div key={value} onClick={() => handleClick(value, option.name)}>
+                {isCurrent ? '• ' : ''}
+                {value}
+              </div>
+            )
+          })}
+        </div>
+      ))}
       <hr />
     </div>
   )
