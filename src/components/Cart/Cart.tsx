@@ -47,11 +47,10 @@ const Cart = () => {
 const LineItem: React.FC<{ data: ICheckoutLineItem }> = ({ data }) => {
   const { title, variant, quantity } = data
   const { updateLineItems } = useCart()
+  const amount = (parseFloat(variant.price) * quantity).toFixed(2)
 
   const inc = () => updateLineItems(data.id, quantity + 1)
   const dec = () => updateLineItems(data.id, quantity - 1)
-
-  const amount = (parseFloat(variant.price) * quantity).toFixed(2)
 
   return (
     <div>

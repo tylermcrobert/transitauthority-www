@@ -3,15 +3,17 @@ import { client } from 'shopify'
 import { NextPage } from 'next'
 import { IProduct } from 'shopify/types'
 import { ProductPage } from 'components'
+import Error from 'next/error'
 
 interface IProductProps {
   product: IProduct
 }
 
-// TODO: Handle 404s
-
 const Product: NextPage<IProductProps> = ({ product }) => {
-  return <ProductPage product={product} />
+  if (product) {
+    return <ProductPage product={product} />
+  }
+  return <Error statusCode={404} />
 }
 
 Product.getInitialProps = async ({ query }) => {
