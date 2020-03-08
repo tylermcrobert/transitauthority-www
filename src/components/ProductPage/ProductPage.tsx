@@ -15,6 +15,7 @@ const ProductCtx = createContext<{
 })
 
 // TODO: Add greyed out for sold out
+// TODO: Add previous price
 
 const ProductPage: React.FC<{ product: IProduct }> = ({ product }) => {
   const [currentVariantId, setCurrentVariantId] = useState<null | string>(null)
