@@ -5,6 +5,7 @@ import useClickAway from 'hooks/useClickAway'
 import S from './Cart.Styled'
 
 // TODO: Add 'remove' functionality
+// TODO: Add rounding for items for things like $44.339999999999996
 
 const Cart = () => {
   const { checkout, isCartOpen, closeCart } = useCart()
