@@ -8,6 +8,8 @@ interface IProductProps {
   product: IProduct
 }
 
+// TODO: Handle 404s
+
 const Product: NextPage<IProductProps> = ({ product }) => {
   return <ProductPage product={product} />
 }
