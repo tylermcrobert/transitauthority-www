@@ -1,17 +1,19 @@
 import React from 'react'
 import useCart from 'hooks/useCart'
-import { ICheckoutLineItem, VariantId } from 'types/shopify'
+import { ICheckoutLineItem } from 'types/shopify'
+import useClickAway from 'hooks/useClickAway'
 import S from './Cart.Styled'
 
-// TODO: Add clickaway
 // TODO: Add 'remove' functionality
 
 const Cart = () => {
   const { checkout, isCartOpen, closeCart } = useCart()
 
+  const ref = useClickAway(closeCart)
+
   if (checkout && isCartOpen) {
     return (
-      <S.Cart>
+      <S.Cart ref={ref}>
         <hr />
         {checkout.lineItems.length ? (
           <div>
