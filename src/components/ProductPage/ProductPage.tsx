@@ -1,38 +1,36 @@
 import React, { useState, useEffect, createContext, useContext } from 'react'
-import { IProduct } from 'shopify/types'
+import { IProduct, IVariant } from 'shopify/types'
 import useCart from 'hooks/useCart'
 import { client } from 'shopify'
 import S from './ProductPage.Styled'
+import usePrice from './usePrice'
 
-const ProductCtx = createContext<{
+export const ProductCtx = createContext<{
   product: IProduct
-  currentVariantId: null | string
+  currentVariant: null | IVariant
   setCurrentVariantId: (id: string) => void
-  displayPrice: number
 }>({
   product: (null as unknown) as IProduct,
-  currentVariantId: null,
+  currentVariant: null,
   setCurrentVariantId: () => null,
-  displayPrice: 0,
 })
 
 // TODO: Add greyed out for sold out
 // TODO: Add previous price
 
 const ProductPage: React.FC<{ product: IProduct }> = ({ product }) => {
-  const [currentVariantId, setCurrentVariantId] = useState<null | string>(null)
+  const [currentVariant, setCurrentVariant] = useState<null | IVariant>(null)
 
-  const displayPrice = product.variants.reduce((acc, variant) => {
-    const amount = parseFloat(variant.price)
-    return acc || amount > acc ? amount : acc
-  }, 0)
+  const setCurrentVariantId = (id: string) => {
+    const foundVariant = product.variants.filter(item => item.id === id)[0]
+    setCurrentVariant(foundVariant)
+  }
 
   return (
     <ProductCtx.Provider
       value={{
         product,
-        currentVariantId,
-        displayPrice,
+        currentVariant,
         setCurrentVariantId,
       }}
     >
@@ -57,11 +55,13 @@ const ProductPage: React.FC<{ product: IProduct }> = ({ product }) => {
 const Information = () => {
   const {
     product: { title, descriptionHtml },
-    displayPrice,
   } = useContext(ProductCtx)
+  const price = usePrice()
+
   return (
     <>
-      <h1>{title}</h1>${displayPrice.toFixed(2)}
+      <h1>{title}</h1>
+      {price}
       <hr />
       <div dangerouslySetInnerHTML={{ __html: descriptionHtml }} />
       <hr />
@@ -129,19 +129,14 @@ const Variants = () => {
  */
 
 const AddToCart: React.FC = () => {
-  const { currentVariantId, product } = useContext(ProductCtx)
+  const { currentVariant, product } = useContext(ProductCtx)
   const { addToCart } = useCart()
 
-  const currentProduct =
-    currentVariantId && product.variants
-      ? product.variants.filter(item => item.id === currentVariantId)[0]
-      : null
-
-  const isSoldOut: boolean = currentProduct ? !currentProduct.available : false
+  const isSoldOut: boolean = currentVariant ? !currentVariant.available : false
 
   const handleCartButton = () => {
-    if (currentVariantId) {
-      addToCart(currentVariantId)
+    if (currentVariant) {
+      addToCart(currentVariant.id)
     }
   }
 
@@ -150,7 +145,7 @@ const AddToCart: React.FC = () => {
       <button
         onClick={isSoldOut ? () => null : handleCartButton}
         type="button"
-        disabled={!currentVariantId}
+        disabled={!currentVariant || isSoldOut}
       >
         {!isSoldOut ? 'Add to cart' : 'Sold Out'}
       </button>
