@@ -14,8 +14,6 @@ const ProductCtx = createContext<{
   setCurrentVariantId: () => null,
 })
 
-// TODO: auto-select single variant
-
 const ProductPage: React.FC<{ product: IProduct }> = ({ product }) => {
   const [currentVariantId, setCurrentVariantId] = useState<null | string>(null)
 

@@ -4,7 +4,7 @@ import { ICheckoutLineItem } from 'types/shopify'
 import useClickAway from 'hooks/useClickAway'
 import S from './Cart.Styled'
 
-// TODO: Add 'remove' functionality
+// TODO: Add remove functionality
 
 const Cart = () => {
   const { checkout, isCartOpen, closeCart } = useCart()
