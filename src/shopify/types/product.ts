@@ -29,7 +29,7 @@ export interface IProduct {
 
   options: Option[]
   images: Array<IImage>
-  variants?: Array<IVariant>
+  variants: Array<IVariant>
 }
 
 export interface IProductData {

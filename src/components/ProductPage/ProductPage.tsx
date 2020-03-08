@@ -8,10 +8,12 @@ const ProductCtx = createContext<{
   product: IProduct
   currentVariantId: null | string
   setCurrentVariantId: (id: string) => void
+  displayPrice: number
 }>({
   product: (null as unknown) as IProduct,
   currentVariantId: null,
   setCurrentVariantId: () => null,
+  displayPrice: 0,
 })
 
 // TODO: Add greyed out for sold out
@@ -20,9 +22,19 @@ const ProductCtx = createContext<{
 const ProductPage: React.FC<{ product: IProduct }> = ({ product }) => {
   const [currentVariantId, setCurrentVariantId] = useState<null | string>(null)
 
+  const displayPrice = product.variants.reduce((acc, variant) => {
+    const amount = parseFloat(variant.price)
+    return acc || amount > acc ? amount : acc
+  }, 0)
+
   return (
     <ProductCtx.Provider
-      value={{ product, currentVariantId, setCurrentVariantId }}
+      value={{
+        product,
+        currentVariantId,
+        displayPrice,
+        setCurrentVariantId,
+      }}
     >
       <S.Wrapper>
         <div>
@@ -45,12 +57,12 @@ const ProductPage: React.FC<{ product: IProduct }> = ({ product }) => {
 const Information = () => {
   const {
     product: { title, descriptionHtml },
+    displayPrice,
   } = useContext(ProductCtx)
   return (
     <>
-      <h1>{title}</h1>
+      <h1>{title}</h1>${displayPrice.toFixed(2)}
       <hr />
-
       <div dangerouslySetInnerHTML={{ __html: descriptionHtml }} />
       <hr />
     </>
