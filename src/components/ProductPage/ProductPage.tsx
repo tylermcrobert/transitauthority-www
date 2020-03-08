@@ -116,8 +116,15 @@ const Variants = () => {
  */
 
 const AddToCart: React.FC = () => {
-  const { currentVariantId } = useContext(ProductCtx)
+  const { currentVariantId, product } = useContext(ProductCtx)
   const { addToCart } = useCart()
+
+  const currentProduct =
+    currentVariantId && product.variants
+      ? product.variants.filter(item => item.id === currentVariantId)[0]
+      : null
+
+  const isSoldOut: boolean = currentProduct ? !currentProduct.available : false
 
   const handleCartButton = () => {
     if (currentVariantId) {
@@ -128,11 +135,11 @@ const AddToCart: React.FC = () => {
   return (
     <div>
       <button
-        onClick={handleCartButton}
+        onClick={isSoldOut ? () => null : handleCartButton}
         type="button"
         disabled={!currentVariantId}
       >
-        Add to cart
+        {!isSoldOut ? 'Add to cart' : 'Sold Out'}
       </button>
     </div>
   )
