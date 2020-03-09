@@ -15,8 +15,8 @@ const theme: DefaultTheme = {
   },
 
   fontFamilies: {
-    sansSerif: `Suisse, helvetica, arial, sans-serif`,
-    serif: `"SelfModern"`,
+    sansSerif: `helvetica, arial, sans-serif`,
+    serif: `"Self Modern", Garamond`,
   },
 
   lineHeights: {

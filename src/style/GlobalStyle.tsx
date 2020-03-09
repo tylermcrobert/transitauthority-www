@@ -3,6 +3,11 @@ import reset from 'styled-reset'
 import { mq } from './index'
 
 const style = css`
+  @font-face {
+    font-family: 'Self Modern';
+    src: url('/fonts/self-modern_regular.woff2');
+  }
+
   * {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

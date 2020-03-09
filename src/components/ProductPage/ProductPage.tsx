@@ -66,7 +66,7 @@ const Information = () => {
     <>
       <LargeHead as="h1">{title}</LargeHead>
       <LargeHead as="h4" isSerif>
-        White on navy blue
+        White on Navy Blue
       </LargeHead>
       <LargeHead as="h4">{price} USD</LargeHead>
       <LargeHead as="p">{isOpen ? '–' : '＋'}Product Details</LargeHead>
