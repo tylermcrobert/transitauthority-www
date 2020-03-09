@@ -16,7 +16,7 @@ const usePrice = () => {
     ? parseFloat(currentVariant.price)
     : defaultPrice
 
-  return `$${price.toFixed(2)}`
+  return `${price.toFixed(2)}`
 }
 
 export default usePrice

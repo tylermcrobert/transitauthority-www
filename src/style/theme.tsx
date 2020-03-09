@@ -1,5 +1,5 @@
-import { DefaultTheme } from "styled-components"
-import modularScale from "./modularScale"
+import { DefaultTheme } from 'styled-components'
+import modularScale from './modularScale'
 
 const scale: number[] = modularScale({ scale: 1.333, stepsDown: 2, length: 15 })
 
@@ -10,13 +10,13 @@ const theme: DefaultTheme = {
   remScale,
 
   colors: {
-    primary: "#000000",
-    secondary: "#ffffff",
+    primary: '#000000',
+    secondary: '#ffffff',
   },
 
   fontFamilies: {
     sansSerif: `Suisse, helvetica, arial, sans-serif`,
-    serif: `"SouvenirStd-light"`,
+    serif: `"SelfModern"`,
   },
 
   lineHeights: {

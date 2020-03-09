@@ -60,15 +60,17 @@ const Information = () => {
 
   const price = usePrice()
 
+  const isOpen = false
+
   return (
     <>
       <LargeHead as="h1">{title}</LargeHead>
-      <LargeHead as="h3">White on navy blue</LargeHead>
-      <LargeHead as="h3">{price}</LargeHead>
-      <hr />
-
-      <div dangerouslySetInnerHTML={{ __html: descriptionHtml }} />
-      <hr />
+      <LargeHead as="h4" isSerif>
+        White on navy blue
+      </LargeHead>
+      <LargeHead as="h4">{price} USD</LargeHead>
+      <LargeHead as="p">{isOpen ? '–' : '＋'}Product Details</LargeHead>
+      {isOpen && <div dangerouslySetInnerHTML={{ __html: descriptionHtml }} />}
     </>
   )
 }
