@@ -20,11 +20,11 @@ declare module 'styled-components' {
     colors: {
       primary: string
       secondary: string
+      green: string
     }
 
     margins: {
       standard: string
-      gutter: string
       large: string
     }
 

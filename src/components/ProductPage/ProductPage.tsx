@@ -36,11 +36,10 @@ const ProductPage: React.FC<{ product: IProduct }> = ({ product }) => {
       }}
     >
       <S.Wrapper>
-        <div>
+        <S.InfoPanel>
           <Information />
           <Variants />
-          <AddToCart />
-        </div>
+        </S.InfoPanel>
         <div>
           <Images />
         </div>
@@ -63,7 +62,7 @@ const Information = () => {
   const isOpen = false
 
   return (
-    <>
+    <div>
       <LargeHead as="h1">{title}</LargeHead>
       <LargeHead as="h4" isSerif>
         White on Navy Blue
@@ -71,7 +70,7 @@ const Information = () => {
       <LargeHead as="h4">{price} USD</LargeHead>
       <LargeHead as="p">{isOpen ? '–' : '＋'}Product Details</LargeHead>
       {isOpen && <div dangerouslySetInnerHTML={{ __html: descriptionHtml }} />}
-    </>
+    </div>
   )
 }
 
@@ -113,19 +112,21 @@ const Variants = () => {
     <>
       {multipleOptions.map(option => (
         <div key={option.name}>
-          <h3>{option.name}</h3>
           {option.values.map(({ value }) => {
             const isCurrent = currentOptions[option.name] === value
             return (
-              <div key={value} onClick={() => handleClick(value, option.name)}>
-                {isCurrent ? '• ' : ''}
+              <S.Variant
+                isCurrent={isCurrent}
+                key={value}
+                onClick={() => handleClick(value, option.name)}
+              >
                 {value}
-              </div>
+              </S.Variant>
             )
           })}
+          <AddToCart />
         </div>
       ))}
-      <hr />
     </>
   )
 }
@@ -147,15 +148,12 @@ const AddToCart: React.FC = () => {
   }
 
   return (
-    <div>
-      <button
-        onClick={isSoldOut ? () => null : handleCartButton}
-        type="button"
-        disabled={!currentVariant || isSoldOut}
-      >
-        {!isSoldOut ? 'Add to cart' : 'Sold Out'}
-      </button>
-    </div>
+    <S.AddToCartButton
+      onClick={isSoldOut ? () => null : handleCartButton}
+      isDisabled={!currentVariant || isSoldOut}
+    >
+      {!isSoldOut ? 'Add to cart' : 'Sold Out'}
+    </S.AddToCartButton>
   )
 }
 

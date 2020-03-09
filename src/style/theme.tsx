@@ -12,6 +12,7 @@ const theme: DefaultTheme = {
   colors: {
     primary: '#000000',
     secondary: '#ffffff',
+    green: '#25dc71',
   },
 
   fontFamilies: {
@@ -26,8 +27,7 @@ const theme: DefaultTheme = {
 
   margins: {
     standard: remScale[3],
-    gutter: remScale[3],
-    large: remScale[8],
+    large: remScale[5],
   },
 
   sizes: {
