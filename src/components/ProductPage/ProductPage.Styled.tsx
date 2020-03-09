@@ -12,6 +12,11 @@ const Wrapper = styled.div`
 
 const InfoPanel = styled.div`
   min-height: calc(100vh - 1.3rem);
+  display: grid;
+  grid-template-rows: 1fr auto;
+
+  padding: 1rem;
+  height: 100%;
 `
 
 const BUTTON_SIZE = 2.25
