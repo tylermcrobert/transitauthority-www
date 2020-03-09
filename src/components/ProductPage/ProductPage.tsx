@@ -2,6 +2,7 @@ import React, { useState, useEffect, createContext, useContext } from 'react'
 import { IProduct } from 'shopify/types'
 import useCart from 'hooks/useCart'
 import { client } from 'shopify'
+import { LargeHead } from 'components'
 import S from './ProductPage.Styled'
 
 const ProductCtx = createContext<{
@@ -48,7 +49,8 @@ const Information = () => {
   } = useContext(ProductCtx)
   return (
     <>
-      <h1>{title}</h1>
+      <LargeHead as="h1">{title}</LargeHead>
+      <LargeHead as="h3">White on navy blue</LargeHead>
       <hr />
 
       <div dangerouslySetInnerHTML={{ __html: descriptionHtml }} />

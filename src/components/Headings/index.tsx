@@ -1,0 +1,1 @@
+export { LargeHead } from './Headings'
