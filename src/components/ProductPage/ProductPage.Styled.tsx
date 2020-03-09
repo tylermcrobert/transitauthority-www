@@ -62,6 +62,10 @@ const Variant = styled.div<{ isCurrent: boolean }>`
     `}
 `
 
+const ExpandButton = styled.div`
+  user-select: none;
+  cursor: pointer;
+`
 const AddToCartButton = styled.div<{ isDisabled: boolean }>`
   height: ${BUTTON_SIZE}rem;
   border-radius: ${BUTTON_SIZE / 2}rem;
@@ -88,4 +92,5 @@ export default {
   Variant,
   AddToCartButton,
   InfoPanel,
+  ExpandButton,
 }

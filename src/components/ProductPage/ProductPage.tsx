@@ -67,9 +67,11 @@ const Information = () => {
         White on Navy Blue
       </LargeHead>
       <LargeHead as="h4">{price} USD</LargeHead>
-      <LargeHead as="button" onClick={() => setIsOpen(!isOpen)}>
-        {isOpen ? '－' : '＋'}Product Details
-      </LargeHead>
+      <S.ExpandButton>
+        <LargeHead as="h5" onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? '－' : '＋'}Product Details
+        </LargeHead>
+      </S.ExpandButton>
       {isOpen && <div dangerouslySetInnerHTML={{ __html: descriptionHtml }} />}
     </div>
   )
