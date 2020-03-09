@@ -18,13 +18,12 @@ const Nav = () => {
         <Link href="/">
           <a>{UNICODE.circle} TRANSIT AUTHORTIY</a>
         </Link>
-        <Link href="/shop">
-          <a>Shop</a>
-        </Link>
         &nbsp;&nbsp;
         <S.NumberWrapper onClick={openCart}>
           {checkoutAmount ? `${checkoutAmount}` : 0}
         </S.NumberWrapper>
+        &nbsp;
+        {UNICODE.circle}
       </S.Nav>
       <Cart />
     </>
