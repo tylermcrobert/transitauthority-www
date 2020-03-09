@@ -53,13 +53,12 @@ const ProductPage: React.FC<{ product: IProduct }> = ({ product }) => {
  */
 
 const Information = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false)
   const {
     product: { title, descriptionHtml },
   } = useContext(ProductCtx)
 
   const price = usePrice()
-
-  const isOpen = false
 
   return (
     <div>
@@ -68,7 +67,9 @@ const Information = () => {
         White on Navy Blue
       </LargeHead>
       <LargeHead as="h4">{price} USD</LargeHead>
-      <LargeHead as="p">{isOpen ? '–' : '＋'}Product Details</LargeHead>
+      <LargeHead as="button" onClick={() => setIsOpen(!isOpen)}>
+        {isOpen ? '－' : '＋'}Product Details
+      </LargeHead>
       {isOpen && <div dangerouslySetInnerHTML={{ __html: descriptionHtml }} />}
     </div>
   )

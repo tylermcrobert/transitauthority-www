@@ -8,15 +8,24 @@ const Wrapper = styled.div`
     width: 100%;
     display: block;
   }
+
+  button {
+    cursor: pointer;
+    padding: 0;
+    -webkit-appearance: none;
+    border: 0;
+    outline: none;
+  }
 `
 
 const InfoPanel = styled.div`
   min-height: calc(100vh - 1.3rem);
+  height: 0;
   display: grid;
   grid-template-rows: 1fr auto;
+  grid-gap: ${props => props.theme.margins.large};
 
   padding: 1rem;
-  height: 100%;
 `
 
 const BUTTON_SIZE = 2.25
