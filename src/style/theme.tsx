@@ -26,7 +26,7 @@ const theme: DefaultTheme = {
   },
 
   margins: {
-    standard: remScale[3],
+    standard: remScale[1],
     large: remScale[5],
   },
 

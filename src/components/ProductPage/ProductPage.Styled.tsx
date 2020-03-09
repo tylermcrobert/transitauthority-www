@@ -19,13 +19,17 @@ const Wrapper = styled.div`
 `
 
 const InfoPanel = styled.div`
-  min-height: calc(100vh - 1.3rem);
+  min-height: calc(100vh - 2.75rem);
   height: 0;
   display: grid;
   grid-template-rows: 1fr auto;
   grid-gap: ${props => props.theme.margins.large};
+  padding: ${props => props.theme.margins.standard};
 
-  padding: 1rem;
+  p {
+    padding-top: ${props => props.theme.margins.standard};
+    max-width: 25em;
+  }
 `
 
 const BUTTON_SIZE = 2.25

@@ -2,7 +2,8 @@ import React from 'react'
 import Link from 'next/link'
 import useCart from 'hooks/useCart'
 import { Cart } from 'components'
-import Styled from './Nav.Styled'
+import { UNICODE } from '../../constants'
+import S from './Nav.Styled'
 
 const Nav = () => {
   const { checkout, openCart } = useCart()
@@ -13,18 +14,18 @@ const Nav = () => {
 
   return (
     <>
-      <Styled.Nav>
+      <S.Nav>
         <Link href="/">
-          <a>Home</a>
+          <a>{UNICODE.circle} TRANSIT AUTHORTIY</a>
         </Link>
         <Link href="/shop">
           <a>Shop</a>
         </Link>
         &nbsp;&nbsp;
-        <div onClick={openCart}>
-          Cart {checkoutAmount ? `(${checkoutAmount})` : null}
-        </div>
-      </Styled.Nav>
+        <S.NumberWrapper onClick={openCart}>
+          {checkoutAmount ? `${checkoutAmount}` : 0}
+        </S.NumberWrapper>
+      </S.Nav>
       <Cart />
     </>
   )
