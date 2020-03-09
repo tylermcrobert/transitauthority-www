@@ -1,44 +1,64 @@
-// import reset from 'styled-reset'
 import { createGlobalStyle, css } from 'styled-components'
+import reset from 'styled-reset'
+import { mq } from './index'
 
-const temp = css`
-  body,
-  html {
-    font-size: 20px;
-  }
-
+const style = css`
   * {
-    margin: 0;
-    padding: 0;
-    font-weight: 400;
-    letter-spacing: -0.03em;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    line-height: 1.3;
+    box-sizing: border-box;
   }
 
-  h1 {
-    font-size: 2.074em;
+  body,
+  html {
+    line-height: ${props => props.theme.lineHeights.body};
+    font-family: ${props => props.theme.fontFamilies.sansSerif};
+    letter-spacing: 0.02em;
+    background: ${props => props.theme.colors.secondary};
+    font-size: 18px;
+    overscroll-behavior-y: none;
+
+    @media ${mq.xs} {
+      font-size: 19px;
+    }
+    @media ${mq.sm} {
+      font-size: 20px;
+    }
+    @media ${mq.md} {
+      font-size: 21px;
+    }
+    @media ${mq.lg} {
+      font-size: 1.3vw;
+    }
   }
-  h2 {
-    font-size: 1.728em;
+
+  a {
+    color: ${props => props.theme.colors.primary};
+    text-decoration: none;
   }
-  h3 {
-    font-size: 1.44em;
+
+  em {
+    font-style: italic;
   }
-  h4 {
-    font-size: 1.2em;
-  }
-  h5 {
-    font-size: 1em;
-  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
   h6 {
-    font-size: 0.833em;
+    line-height: ${props => props.theme.lineHeights.heading};
+  }
+
+  img,
+  video {
+    display: block;
+    width: 100%;
   }
 `
-
 const GlobalStyle = createGlobalStyle`
-  ${temp}
+  ${reset}
+  ${style}
 `
 
 export default GlobalStyle
