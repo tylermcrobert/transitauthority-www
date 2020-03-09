@@ -1,17 +1,18 @@
 import React, { useState, useEffect, createContext, useContext } from 'react'
-import { IProduct } from 'shopify/types'
+import { IProduct, IVariant } from 'shopify/types'
 import useCart from 'hooks/useCart'
 import { client } from 'shopify'
 import { LargeHead } from 'components'
 import S from './ProductPage.Styled'
+import usePrice from './usePrice'
 
-const ProductCtx = createContext<{
+export const ProductCtx = createContext<{
   product: IProduct
-  currentVariantId: null | string
+  currentVariant: null | IVariant
   setCurrentVariantId: (id: string) => void
 }>({
   product: (null as unknown) as IProduct,
-  currentVariantId: null,
+  currentVariant: null,
   setCurrentVariantId: () => null,
 })
 
@@ -19,11 +20,20 @@ const ProductCtx = createContext<{
 // TODO: Add previous price
 
 const ProductPage: React.FC<{ product: IProduct }> = ({ product }) => {
-  const [currentVariantId, setCurrentVariantId] = useState<null | string>(null)
+  const [currentVariant, setCurrentVariant] = useState<null | IVariant>(null)
+
+  const setCurrentVariantId = (id: string) => {
+    const foundVariant = product.variants.filter(item => item.id === id)[0]
+    setCurrentVariant(foundVariant)
+  }
 
   return (
     <ProductCtx.Provider
-      value={{ product, currentVariantId, setCurrentVariantId }}
+      value={{
+        product,
+        currentVariant,
+        setCurrentVariantId,
+      }}
     >
       <S.Wrapper>
         <div>
@@ -47,10 +57,14 @@ const Information = () => {
   const {
     product: { title, descriptionHtml },
   } = useContext(ProductCtx)
+
+  const price = usePrice()
+
   return (
     <>
       <LargeHead as="h1">{title}</LargeHead>
       <LargeHead as="h3">White on navy blue</LargeHead>
+      <LargeHead as="h3">{price}</LargeHead>
       <hr />
 
       <div dangerouslySetInnerHTML={{ __html: descriptionHtml }} />
@@ -119,19 +133,14 @@ const Variants = () => {
  */
 
 const AddToCart: React.FC = () => {
-  const { currentVariantId, product } = useContext(ProductCtx)
+  const { currentVariant } = useContext(ProductCtx)
   const { addToCart } = useCart()
 
-  const currentProduct =
-    currentVariantId && product.variants
-      ? product.variants.filter(item => item.id === currentVariantId)[0]
-      : null
-
-  const isSoldOut: boolean = currentProduct ? !currentProduct.available : false
+  const isSoldOut: boolean = currentVariant ? !currentVariant.available : false
 
   const handleCartButton = () => {
-    if (currentVariantId) {
-      addToCart(currentVariantId)
+    if (currentVariant) {
+      addToCart(currentVariant.id)
     }
   }
 
@@ -140,7 +149,7 @@ const AddToCart: React.FC = () => {
       <button
         onClick={isSoldOut ? () => null : handleCartButton}
         type="button"
-        disabled={!currentVariantId}
+        disabled={!currentVariant || isSoldOut}
       >
         {!isSoldOut ? 'Add to cart' : 'Sold Out'}
       </button>
