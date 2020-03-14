@@ -1,12 +1,16 @@
 import { createGlobalStyle, css } from 'styled-components'
 import reset from 'styled-reset'
+import modularScale from './modularScale'
 import { mq } from './index'
+
+const scale: number[] = modularScale({ scale: 1.333, stepsDown: 2, length: 15 })
 
 const style = css`
   :root {
     --bg-color: white;
     --text-color: black;
-    --spacing-standard: ${props => props.theme.remScale[0]};
+    ${scale.map((item, i) => `--size-${i}: ${item}rem`).join(';\n')};
+    --spacing-standard: var(--size-0);
   }
 
   @font-face {
