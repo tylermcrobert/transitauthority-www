@@ -33,7 +33,7 @@ const InfoPanel = styled.div`
 `
 
 const BUTTON_SIZE = 2.25
-const BORDER = ` box-shadow: inset 0 0 0 1.5px black;`
+const BORDER = ` box-shadow: inset 0 0 0 1.5px var(--text-color);`
 
 const Variant = styled.div<{ isCurrent: boolean }>`
   width: ${BUTTON_SIZE}rem;

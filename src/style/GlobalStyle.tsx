@@ -4,8 +4,8 @@ import { mq } from './index'
 
 const style = css`
   :root {
-    --bg-color: white;
-    --text-color: black;
+    --bg-color: black;
+    --text-color: white;
   }
 
   @font-face {
