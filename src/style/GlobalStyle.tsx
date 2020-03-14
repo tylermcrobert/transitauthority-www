@@ -9,6 +9,7 @@ const style = css`
   :root {
     --bg-color: white;
     --text-color: black;
+
     ${scale.map((item, i) => `--size-${i}: ${item}rem`).join(';\n')};
     --spacing-standard: var(--size-0);
   }
