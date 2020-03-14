@@ -6,6 +6,7 @@ const style = css`
   :root {
     --bg-color: white;
     --text-color: black;
+    --spacing-standard: ${props => props.theme.remScale[0]};
   }
 
   @font-face {

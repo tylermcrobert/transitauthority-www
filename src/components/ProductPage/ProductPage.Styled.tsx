@@ -36,6 +36,7 @@ const BUTTON_SIZE = 2.25
 const BORDER = ` box-shadow: inset 0 0 0 1.5px var(--text-color);`
 
 const Variant = styled.div<{ isCurrent: boolean }>`
+  margin-top: var(--spacing-standard);
   width: ${BUTTON_SIZE}rem;
   height: ${BUTTON_SIZE}rem;
   border-radius: ${BUTTON_SIZE / 2}rem;
@@ -65,6 +66,7 @@ const ExpandButton = styled.div`
   cursor: pointer;
 `
 const AddToCartButton = styled.div<{ isDisabled: boolean }>`
+  margin-top: var(--spacing-standard);
   height: ${BUTTON_SIZE}rem;
   border-radius: ${BUTTON_SIZE / 2}rem;
   display: inline-block;
