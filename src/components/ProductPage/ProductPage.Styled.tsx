@@ -36,12 +36,10 @@ const BUTTON_SIZE = 2.25
 const BORDER = ` box-shadow: inset 0 0 0 1.5px black;`
 
 const Variant = styled.div<{ isCurrent: boolean }>`
-  /* border: 1px solid ${props => props.theme.colors.primary}; */
   width: ${BUTTON_SIZE}rem;
   height: ${BUTTON_SIZE}rem;
   border-radius: ${BUTTON_SIZE / 2}rem;
   ${BORDER}
- 
 
   display: inline-flex;
   justify-content: center;
@@ -51,13 +49,13 @@ const Variant = styled.div<{ isCurrent: boolean }>`
   margin-right: 0.5rem;
 
   cursor: pointer;
-  user-select:none;
+  user-select: none;
 
   ${props =>
     props.isCurrent &&
     css`
       background: ${props.theme.colors.green};
-      color: ${props.theme.colors.secondary};
+      color: var(--bg-color);
       box-shadow: none;
     `}
 `
@@ -81,8 +79,8 @@ const AddToCartButton = styled.div<{ isDisabled: boolean }>`
     ${props =>
       !props.isDisabled &&
       css`
-        background: ${props.theme.colors.primary};
-        color: ${props.theme.colors.secondary};
+        background: var(--text-color);
+        color: var(--bg-color);
       `}
   }
 `

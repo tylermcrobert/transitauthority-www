@@ -3,6 +3,11 @@ import reset from 'styled-reset'
 import { mq } from './index'
 
 const style = css`
+  :root {
+    --bg-color: white;
+    --text-color: black;
+  }
+
   @font-face {
     font-family: 'Self Modern';
     src: url('/fonts/self-modern_regular.woff2');
@@ -19,7 +24,8 @@ const style = css`
     line-height: ${props => props.theme.lineHeights.body};
     font-family: ${props => props.theme.fontFamilies.sansSerif};
     letter-spacing: 0.02em;
-    background: ${props => props.theme.colors.secondary};
+    color: var(--text-color);
+    background: var(--bg-color);
     font-size: 18px;
     overscroll-behavior-y: none;
 
@@ -38,7 +44,7 @@ const style = css`
   }
 
   a {
-    color: ${props => props.theme.colors.primary};
+    color: var(--text-color);
     text-decoration: none;
   }
 

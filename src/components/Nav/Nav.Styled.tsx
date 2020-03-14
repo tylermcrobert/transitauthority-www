@@ -4,7 +4,7 @@ const Nav = styled.nav`
   position: sticky;
   top: 0px;
 
-  background: white;
+  background: var(--bg-color);
   width: 100%;
 
   display: flex;
@@ -16,7 +16,7 @@ const Nav = styled.nav`
 `
 
 const NumberWrapper = styled.div`
-  border: 1px solid ${props => props.theme.colors.primary};
+  border: 1px solid var(--text-color);
   height: 1.3rem;
   width: 1.3rem;
   border-radius: 50%;
