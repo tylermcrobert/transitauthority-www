@@ -10,6 +10,8 @@ const Nav = styled.nav`
   display: flex;
   padding: ${props => props.theme.margins.standard};
 
+  user-select: none;
+
   > * :first-child {
     flex: 1;
   }
