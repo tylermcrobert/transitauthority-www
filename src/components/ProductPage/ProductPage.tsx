@@ -1,5 +1,6 @@
 import React, { useState, useEffect, createContext, useContext } from 'react'
-import { IProduct, IVariant } from 'shopify/types'
+import { IVariant } from 'shopify/types/variant'
+import { IProduct } from 'shopify/types/product'
 import useCart from 'hooks/useCart'
 import { client } from 'shopify'
 import { LargeHead } from 'components'

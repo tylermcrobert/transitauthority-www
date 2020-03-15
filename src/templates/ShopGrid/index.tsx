@@ -1,5 +1,5 @@
 import React from 'react'
-import { IProduct } from 'shopify/types'
+import { IProduct } from 'shopify/types/product'
 import Link from 'next/link'
 import Styled from './Styled'
 

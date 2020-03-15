@@ -1,7 +1,7 @@
 import React from 'react'
 import { client } from 'shopify'
 import { NextPage } from 'next'
-import { IProduct } from 'shopify/types'
+import { IProduct } from 'shopify/types/product'
 import ShopGrid from 'templates/ShopGrid'
 
 interface IShop {
